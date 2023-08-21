@@ -46,7 +46,7 @@ func (s *Server) ordersHandler(w http.ResponseWriter, r *http.Request) {
 	od := s.storage.GetFromCacheByUID(id)
 	if od.OrderUid == "" {
 		w.WriteHeader(http.StatusBadRequest)
-		parsedTemplate, _ := template.ParseFiles("./server/templates/notFound.html")
+		parsedTemplate, _ := template.ParseFiles("../internal/service/server/templates/notFound.html")
 		err := parsedTemplate.Execute(w, struct{ Id string }{Id: id})
 		if err != nil {
 			_, err = w.Write([]byte("no data with id " + id))
@@ -63,7 +63,7 @@ func (s *Server) ordersHandler(w http.ResponseWriter, r *http.Request) {
 		ID:        id,
 		OrderData: od,
 	}
-	parsedTemplate, _ := template.ParseFiles("./server/templates/index.html")
+	parsedTemplate, _ := template.ParseFiles("../internal/service/server/templates/index.html")
 	err := parsedTemplate.Execute(w, dataItem)
 	if err != nil {
 		w.Write([]byte("error while executing template"))
