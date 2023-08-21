@@ -7,9 +7,9 @@ import (
 
 const (
 	NATSStreamingURL = "localhost:4223"
-	clusterID        = "cluster1"
-	clientID         = "publisher1"
-	channel          = "channel1"
+	clusterID        = "test-cluster"
+	clientID         = "test-publisher"
+	channel          = "test-channel"
 )
 
 func main() {
