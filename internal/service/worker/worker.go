@@ -11,6 +11,9 @@ import (
 	"github.com/pamallika/WBL0v2/internal/service/store"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -54,6 +57,8 @@ func (app *App) Run() {
 	}
 
 	server := server.InitServer(*storeService, app.cfg.Http_server.Host+":"+app.cfg.Http_server.Port)
+	done := make(chan os.Signal, 1)
+	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	go func() {
 		if err := server.Start(); err != nil && err != http.ErrServerClosed {
@@ -61,7 +66,8 @@ func (app *App) Run() {
 		}
 	}()
 	log.Print("Server Started")
-
+	<-done
+	log.Print("Server Stopped")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer func() {
 		cancel()
