@@ -16,7 +16,7 @@ func TestCacheService_AddToCache(t *testing.T) {
 	cache := CacheInit()
 	require.NotNil(t, cache)
 	fakeCache := make(CacheStore)
-	text, err := os.ReadFile("../testdata/payload.json")
+	text, err := os.ReadFile("../../../cmd/testdata/1.json")
 	if err != nil {
 		t.Fatal("error reading testdata file")
 	}
@@ -30,7 +30,7 @@ func TestCacheService_AddToCache(t *testing.T) {
 
 func TestCacheService_GetFromCache(t *testing.T) {
 	cache := CacheInit()
-	text, err := os.ReadFile("../testdata/payload.json")
+	text, err := os.ReadFile("../../../cmd/testdata/1.json")
 	if err != nil {
 		t.Fatal("error reading testdata file")
 	}

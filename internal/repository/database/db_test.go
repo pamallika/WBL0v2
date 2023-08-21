@@ -14,7 +14,7 @@ func TestDBService_SaveOrder(t *testing.T) {
 	}
 	defer db.Close()
 
-	text, err := os.ReadFile("../testdata/payload.json")
+	text, err := os.ReadFile("../../../cmd/testdata/1.json")
 	if err != nil {
 		t.Fatal("error reading testdata file")
 	}
